@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./maze.css" rel="stylesheet" type="text/css">
+
+    <title>Maze</title>
+</head>
+
+<body>
+    <div class="maze-container">
+        <div id="bloclyStage">
+            <div id="maze">
+                <span id="marker"></span>
+                <canvas id="canvas" width="500px" height="500px"></canvas>
+            </div>
+            <button id="blocklyRun">Run</button>
+            <button id="blocklyReset">Reset</button>
+        </div>
+        <div id="blocklyWorkspace"></div>
+    </div>
+
+    <!-- Load Blockly core -->
+    <script src="./node_modules//blockly/blockly_compressed.js"></script>
+    <!-- Load the default blocks -->
+    <script src="./node_modules/blockly/blocks_compressed.js"></script>
+    <!-- Load a generator -->
+    <script src="./node_modules/blockly/javascript_compressed.js"></script>
+    <!-- Load a message file -->
+    <script src="./node_modules/blockly/msg/pt-br.js"></script>
+
+    <!-- <script src="./move.js"></script>
+    <script src="./maze_blocks.js"></script>
+    <script src="./maze.js"></script> -->
+    <script src="./Maze.js"></script>
+    <script src="./GnarusBlockly.js"></script>
+    <script>
+        const maze = new Maze();
+        const gnarusBlockly = new GnarusBlockly(maze, 'blocklyWorkspace', 'blocklyRun', 'blocklyReset');
+    </script>
+</body>
+
+</html>

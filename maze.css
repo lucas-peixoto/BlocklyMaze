@@ -1,0 +1,36 @@
+.maze-container {
+    display: flex;
+    gap: 20px;
+}
+
+#bloclyStage #maze {
+    position: relative;
+    /* background-image: url(img/maze.png);
+    background-repeat: no-repeat;
+    background-size: 480px 400px;
+    background-size: contain;
+    height: 400px;
+    width: 480px; */
+    z-index: 1;
+}
+
+#canvas {
+    position: relative;
+    z-index: 1;
+}
+
+#marker {
+    background-image: url(img/player.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 48px;
+    width: 48px;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
+    z-index: 2;
+}
+
+#blocklyWorkspace {
+    height: 480px;
+    width: 600px;
+}
