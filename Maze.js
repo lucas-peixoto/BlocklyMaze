@@ -2,7 +2,7 @@ class Maze {
 
     constructor() {
         this.canvas = document.getElementById("canvas");
-        this.ctx = canvas.getContext("2d");
+        this.ctx = this.canvas.getContext("2d");
         this.player = document.getElementById("marker");
         this.obstacle = null;
         this.goal = null;
@@ -18,8 +18,8 @@ class Maze {
         this.playerPosition = this.findStartPlayerPosition();
         this.goalPosition = this.findGoalPosition();
 
-        this.squareWidth = this.canvas.width / this.maze.length;
-        this.squareHeight = this.canvas.height / this.maze[0].length;
+        this.squareWidth = this.canvas.width / this.maze[0].length;
+        this.squareHeight = this.canvas.height / this.maze.length;
         this.itemPadding = 25;
         this.itemWidth = this.squareWidth - (this.itemPadding * 2);
         this.itemHeight = this.squareHeight - (this.itemPadding * 2);
