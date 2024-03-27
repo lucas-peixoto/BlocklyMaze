@@ -6,7 +6,42 @@ class GnarusBlockly {
         this.createBlocks();
         this.workspace = this.createWorkspace(workspaceId);
         this.workspace.addChangeListener(Blockly.Events.disableOrphans)
-        // const xmlElement = new DOMParser().parseFromString('<xml xmlns="https://developers.google.com/blockly/xml"><block type="move_right" id="6nYjL[}$8s`gogJDSmMp" x="282" y="91"><next><block type="move_right" id="W~u;#7WWV*}^_4Q,^MjH"><next><block type="controls_repeat" id="wJQ8[X{O(Wnq]66yjW.7"><field name="TIMES">10</field></block></next></block></next></block></xml>', 'text/xml').documentElement;
+        const xmlText = `<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="move_left" id=",x~@FpG5v,?7]9K3$1?}" disabled="true" x="71" y="46"></block>
+  <block type="start" id="CZ{s;Nh6om0bgSa.=-s_" x="216" y="51">
+    <next>
+      <block type="move_right" id="#Qgt~i4H*4r$}L$G:TLl">
+        <next>
+          <block type="move_right" id="JC?2C^~H~;g+cf%WR5/H">
+            <next>
+              <block type="controls_repeat" id="fU+I!{K/.4%,ZQpkpng+">
+                <field name="TIMES">3</field>
+                <statement name="DO">
+                  <block type="move_down" id="ijM!/p}5ycBn25tW)2te"></block>
+                </statement>
+                <next>
+                  <block type="move_right" id="l197UKBN*2^7(oYhiKR%">
+                    <next>
+                      <block type="move_right" id="@s$\`i(}StC$o.@Q])J+j">
+                        <next>
+                          <block type="move_down" id="Hyv+CsEX|O{]JcR8S7]3"></block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+  <block type="move_up" id="ZP:O^@?V_$+X=Ybx4~hH" disabled="true" x="137" y="126"></block>
+  <block type="move_left" id="{n0\`q(6i!v93w{SYMC6z" disabled="true" x="298" y="262"></block>
+  <block type="move_down" id="/fba;rQ[8,f*MP-h#MA1" disabled="true" x="238" y="345"></block>
+</xml>`
+        // const xmlElement = Blockly.utils.xml.textToDom(xmlText);
         // Blockly.Xml.domToWorkspace(xmlElement, this.workspace);
         this.runButton = document.getElementById(runButtonId);
         this.clearButton = document.getElementById(clearButtonId);
@@ -154,6 +189,9 @@ class GnarusBlockly {
 
         return Blockly.inject(workspaceId, {
             toolbox: this.toolbox,
+            maxInstances: {
+                'start': 1
+            },
             theme: "alura",
             trashcan: true
         });
