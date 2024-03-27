@@ -111,7 +111,9 @@ class Maze {
             }, 500);
         } else if (!canMove) {
             setTimeout(() => {
-                alert("Bateu!");
+                const li = document.createElement("li");
+                li.appendChild(document.createTextNode("Bateu!"));
+                document.getElementById("alerts").appendChild(li);
             }, 500);
             throw new Error("Bateu!");
         }
