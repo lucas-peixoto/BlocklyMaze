@@ -23,7 +23,7 @@
     </div>
 
     <!-- Load Blockly core -->
-    <script src="./node_modules//blockly/blockly_compressed.js"></script>
+    <script src="./node_modules/blockly/blockly_compressed.js"></script>
     <!-- Load the default blocks -->
     <script src="./node_modules/blockly/blocks_compressed.js"></script>
     <!-- Load a generator -->
@@ -38,7 +38,7 @@
     <script src="./GnarusBlockly.js"></script>
     <script>
         const maze = new Maze();
-        const gnarusBlockly = new GnarusBlockly(maze, 'blocklyWorkspace', 'blocklyRun', 'blocklyReset');
+        new GnarusBlockly(maze, 'blocklyWorkspace', 'blocklyRun', 'blocklyReset');
     </script>
 </body>
 

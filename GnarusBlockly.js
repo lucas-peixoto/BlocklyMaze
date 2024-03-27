@@ -1,14 +1,34 @@
+// import * as Blockly from "blockly";
+
 class GnarusBlockly {
     constructor(maze, workspaceId, runButtonId, clearButtonId) {
         this.maze = maze;
         this.createBlocks();
         this.workspace = this.createWorkspace(workspaceId);
+        this.workspace.addChangeListener(Blockly.Events.disableOrphans)
+        // const xmlElement = new DOMParser().parseFromString('<xml xmlns="https://developers.google.com/blockly/xml"><block type="move_right" id="6nYjL[}$8s`gogJDSmMp" x="282" y="91"><next><block type="move_right" id="W~u;#7WWV*}^_4Q,^MjH"><next><block type="controls_repeat" id="wJQ8[X{O(Wnq]66yjW.7"><field name="TIMES">10</field></block></next></block></next></block></xml>', 'text/xml').documentElement;
+        // Blockly.Xml.domToWorkspace(xmlElement, this.workspace);
         this.runButton = document.getElementById(runButtonId);
         this.clearButton = document.getElementById(clearButtonId);
         this.createEventListeners();
     }
 
     createBlocks() {
+        Blockly.Blocks["start"] = {
+            init: function () {
+                this.jsonInit({
+                    type: 'start',
+                    message0: 'Start',
+                    // style: 'move_blocks',
+                    nextStatement: null
+                });
+            }
+        };
+
+        Blockly.JavaScript.forBlock['start'] = function () {
+            return "";
+        }
+
         Blockly.Blocks["move_right"] = {
             init: function () {
                 this.jsonInit({
@@ -78,22 +98,12 @@ class GnarusBlockly {
         }
 
         Blockly.JavaScript.forBlock['controls_repeat'] = function (block, generator) {
-            let repeats;
-
-            if (block.getField('TIMES')) {
-                // Internal number.
-                repeats = Number(block.getFieldValue('TIMES'));
-            } else {
-                // External number.
-                repeats = generator.valueToCode(block, 'TIMES', Order.ASSIGNMENT) || 0;
-            }
-
-            let branch = generator.statementToCode(block, 'DO');
+            const repeats = Number(block.getFieldValue('TIMES')) || generator.valueToCode(block, 'TIMES', Order.ASSIGNMENT) || 0;
+            const branch = generator.statementToCode(block, 'DO').trim();
             let code = '';
-            let endVar = repeats;
 
-            for (let loopVar = 0; loopVar < endVar; loopVar++) {
-                code += branch.trim() + '\n';
+            for (let i = 0; i < repeats; i++) {
+                code += branch + '\n';
             }
 
             return code;
@@ -104,6 +114,10 @@ class GnarusBlockly {
         this.toolbox = {
             "kind": "flyoutToolbox",
             "contents": [
+                {
+                    "kind": "block",
+                    "type": "start"
+                },
                 {
                     "kind": "block",
                     "type": "move_right"
@@ -148,6 +162,8 @@ class GnarusBlockly {
     runCode() {
         const code = Blockly.JavaScript.workspaceToCode(this.workspace);
         console.log(code);
+        console.log(Blockly.Xml.workspaceToDom(this.workspace));
+        console.log(Blockly.Xml.domToPrettyText(Blockly.Xml.workspaceToDom(this.workspace)));
 
         try {
             code.split('\n').forEach((line, index) => {
